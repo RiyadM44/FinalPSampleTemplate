@@ -1,15 +1,21 @@
-name: Create Directory on Push
+name: SSH into Ubuntu Machine
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
-  create_directory:
+  ssh_to_ubuntu:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
       - name: Create SSH directory
         run: mkdir -p ~/.ssh
-      - name: Configure SSH
-        run: echo "${{ secrets.RHY_SSH_PRIVATE_KEY }}" > ~/.ssh/pr_key
+      
+      - name: Write private key to file
+        run: echo "${{ secrets.RHY_SSH_PRIVATE_KEY }}" > ~/.ssh/RHY.pem
+      
+      - name: Set permissions for private key file
+        run: chmod 600 ~/.ssh/RHY.pem
+      
+      - name: SSH into Ubuntu machine
+        run: ssh -i ~/.ssh/RHY.pem ubuntu@3.124.195.133
