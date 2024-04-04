@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Create SSH directory
+        run: mkdir -p ~/.ssh
       - name: Configure SSH
-        run: |
-          mkdir ~/hi/
-          echo "${{ secrets.RHY_SSH_PRIVATE_KEY }}" > ~/.ssh/pr_key
+        run: echo "${{ secrets.RHY_SSH_PRIVATE_KEY }}" > ~/.ssh/pr_key
