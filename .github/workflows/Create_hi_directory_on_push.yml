@@ -17,5 +17,8 @@ jobs:
       - name: Set permissions for private key file
         run: chmod 600 ~/.ssh/RHY.pem
       
+      - name: Update known_hosts file
+        run: ssh-keyscan -H 3.124.195.133 >> ~/.ssh/known_hosts
+      
       - name: SSH into Ubuntu machine
         run: ssh -i ~/.ssh/RHY.pem ubuntu@3.124.195.133
