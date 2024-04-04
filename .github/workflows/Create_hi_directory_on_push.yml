@@ -13,9 +13,7 @@ jobs:
       
       - name: Write private key to file
         run: echo "${{ secrets.RHY_SSH_PRIVATE_KEY }}" > ~/.ssh/RHY.pem
-      
-      - name: Set permissions for private key file
-        run: chmod 600 ~/.ssh/RHY.pem
+
       
       - name: Update known_hosts file
         run: ssh-keyscan -H 3.124.195.133 >> ~/.ssh/known_hosts
