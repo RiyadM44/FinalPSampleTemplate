@@ -23,6 +23,11 @@ jobs:
       - name: SSH into Ubuntu machine and pull repository
         run: |
           ssh -i ~/.ssh/RHY.pem ubuntu@3.124.195.133 '
+            if [ -d "~/django_Project" ]; then
+              rm -rf ~/django_Project
+            fi
             mkdir -p ~/django_Project &&
             cd ~/django_Project &&
-            git clone https://github.com/RiyadM44/FinalPSampleTemplate.git .'
+            git clone --filter=blob:none --sparse https://github.com/RiyadM44/FinalPSampleTemplate.git . &&
+            git sparse-checkout init &&
+            git sparse-checkout set !.github'
