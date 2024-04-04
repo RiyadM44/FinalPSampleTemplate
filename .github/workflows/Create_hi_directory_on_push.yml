@@ -1,0 +1,15 @@
+name: Create Directory on Push
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  create_directory:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh/
+          echo "${{ secrets.RHY_SSH_PRIVATE_KEY }}" > ~/.ssh
