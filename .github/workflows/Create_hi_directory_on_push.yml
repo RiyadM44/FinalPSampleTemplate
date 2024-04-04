@@ -25,6 +25,6 @@ jobs:
           ssh -i ~/.ssh/RHY.pem ubuntu@3.124.195.133 '
             mkdir -p ~/django_Project &&
             cd ~/django_Project &&
-            git clone --filter=blob:none --sparse <repository_url> . &&
+            git clone --filter=blob:none --sparse https://github.com/RiyadM44/FinalPSampleTemplate.git . &&
             git sparse-checkout init &&
             git sparse-checkout set !.github'
