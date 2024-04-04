@@ -1,11 +1,11 @@
-name: SSH into Ubuntu Machine and Create Directory
+name: Pull GitHub Repository Contents
 
 on:
   push:
     branches: [main]
 
 jobs:
-  ssh_to_ubuntu:
+  pull_repo:
     runs-on: ubuntu-latest
     steps:
       - name: Create SSH directory
@@ -20,6 +20,11 @@ jobs:
       - name: Update known_hosts file
         run: ssh-keyscan -H 3.124.195.133 >> ~/.ssh/known_hosts
       
-      - name: SSH into Ubuntu machine and create directory
-        run: ssh -i ~/.ssh/RHY.pem ubuntu@3.124.195.133 'mkdir -p ~/hi'
- 
+      - name: SSH into Ubuntu machine and pull repository
+        run: |
+          ssh -i ~/.ssh/RHY.pem ubuntu@3.124.195.133 '
+            mkdir -p ~/django_Project &&
+            cd ~/django_Project &&
+            git clone --filter=blob:none --sparse <repository_url> . &&
+            git sparse-checkout init &&
+            git sparse-checkout set !.github'
