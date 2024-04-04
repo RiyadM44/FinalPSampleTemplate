@@ -20,28 +20,10 @@ jobs:
       - name: Update known_hosts file
         run: ssh-keyscan -H 3.124.195.133 >> ~/.ssh/known_hosts
       
-      - name: Check if directory exists
-        run: |
-          ssh -i ~/.ssh/RHY.pem ubuntu@3.124.195.133 'test -d ~/django_Project || echo "Directory not found"'
-      
-      - name: Clone or pull repository
+      - name: Delete existing directory and clone repository
         run: |
           ssh -i ~/.ssh/RHY.pem ubuntu@3.124.195.133 '
-            if [ -d "~/django_Project" ]; then
-              cd ~/django_Project
-              if [ -z "$(ls -A .)" ]; then
-                echo "Directory is empty"
-                git pull origin main
-              else
-                echo "Directory is not empty"
-                rm -rf ~/django_Project
-                mkdir -p ~/django_Project &&
-                cd ~/django_Project &&
-                git clone https://github.com/RiyadM44/FinalPSampleTemplate.git .
-              fi
-            else
-              echo "Creating directory"
-              mkdir -p ~/django_Project &&
-              cd ~/django_Project &&
-              git clone https://github.com/RiyadM44/FinalPSampleTemplate.git .
-            fi'
+            rm -rf ~/django_Project &&
+            mkdir -p ~/django_Project &&
+            cd ~/django_Project &&
+            git clone https://github.com/RiyadM44/FinalPSampleTemplate.git .'
