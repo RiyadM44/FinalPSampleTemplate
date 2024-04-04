@@ -34,7 +34,10 @@ jobs:
                 git pull origin main
               else
                 echo "Directory is not empty"
-                git pull origin main
+                rm -rf ~/django_Project
+                mkdir -p ~/django_Project &&
+                cd ~/django_Project &&
+                git clone https://github.com/RiyadM44/FinalPSampleTemplate.git .
               fi
             else
               echo "Creating directory"
