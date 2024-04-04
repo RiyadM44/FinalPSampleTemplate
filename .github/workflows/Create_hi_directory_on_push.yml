@@ -1,4 +1,4 @@
-name: SSH into Ubuntu Machine
+name: SSH into Ubuntu Machine and Create Directory
 
 on:
   push:
@@ -20,5 +20,5 @@ jobs:
       - name: Update known_hosts file
         run: ssh-keyscan -H 3.124.195.133 >> ~/.ssh/known_hosts
       
-      - name: SSH into Ubuntu machine
-        run: ssh -i ~/.ssh/RHY.pem ubuntu@3.124.195.133
+      - name: SSH into Ubuntu machine and create directory
+        run: ssh -i ~/.ssh/RHY.pem ubuntu@3.124.195.133 'mkdir -p ~/hi'
