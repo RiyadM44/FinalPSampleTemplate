@@ -22,3 +22,4 @@ jobs:
       
       - name: SSH into Ubuntu machine and create directory
         run: ssh -i ~/.ssh/RHY.pem ubuntu@3.124.195.133 'mkdir -p ~/hi'
+ 
